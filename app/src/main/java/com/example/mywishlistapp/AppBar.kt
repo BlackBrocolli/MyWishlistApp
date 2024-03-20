@@ -35,7 +35,6 @@ fun AppBarView(
             null
         }
 
-
     TopAppBar(
         title = {
             Text(
