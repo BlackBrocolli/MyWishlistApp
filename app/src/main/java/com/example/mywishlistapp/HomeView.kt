@@ -21,11 +21,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.mywishlistapp.data.DummyWish
 import com.example.mywishlistapp.data.Wish
 
 @Composable
-fun HomeView() {
+fun HomeView(
+    navController: NavController,
+    viewModel: WishViewModel
+) {
 
     Scaffold(
         topBar = {
@@ -33,7 +37,9 @@ fun HomeView() {
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /*TODO: Add navigation to ADD Screen*/ },
+                onClick = {
+                    navController.navigate(Screen.AddScreen.route)
+                },
                 modifier = Modifier.padding(20.dp),
                 containerColor = Color.Black
             ) {
