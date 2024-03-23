@@ -93,7 +93,14 @@ fun AddEditDetailView(id: Long, viewModel: WishViewModel, navController: NavCont
             Button(onClick = {
                 if (viewModel.wishTitleState.isNotEmpty() && viewModel.wishDescriptionState.isNotEmpty()) {
                     if (id != 0L) {
-                        /*TODO: Update wish*/
+                        // UPDATE WISH
+                        viewModel.updateWish(
+                            Wish(
+                                id = id,
+                                title = viewModel.wishTitleState.trim(),
+                                description = viewModel.wishDescriptionState.trim()
+                            )
+                        )
                     } else {
                         // ADD NEW WISH
                         viewModel.addWish(
@@ -109,7 +116,7 @@ fun AddEditDetailView(id: Long, viewModel: WishViewModel, navController: NavCont
                     snackMessage.value = "Enter fields to create a wish"
                 }
                 scope.launch {
-                    scaffoldstate.snackbarHostState.showSnackbar(snackMessage.value)
+//                    scaffoldstate.snackbarHostState.showSnackbar(snackMessage.value)
                     navController.navigateUp()
                 }
             }) {
