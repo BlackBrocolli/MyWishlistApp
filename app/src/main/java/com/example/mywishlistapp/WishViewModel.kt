@@ -25,6 +25,11 @@ class WishViewModel(
         wishDescriptionState = newString
     }
 
+    fun resetTitleDescriptionState() {
+        wishTitleState = ""
+        wishDescriptionState = ""
+    }
+
     lateinit var getAllWishes: Flow<List<Wish>>
 
     init {

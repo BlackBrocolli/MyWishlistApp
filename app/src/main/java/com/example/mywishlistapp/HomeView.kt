@@ -17,6 +17,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -51,12 +52,15 @@ fun HomeView(
             }
         }
     ) {
+        // collect all of the wishes from db
+        val wishlist = viewModel.getAllWishes.collectAsState(initial = listOf())
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
         ) {
-            items(DummyWish.wishlist) { wish ->
+            items(wishlist.value) { wish ->
                 WishItem(wish = wish) {
 
                 }

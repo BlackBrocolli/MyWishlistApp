@@ -91,6 +91,7 @@ fun AddEditDetailView(id: Long, viewModel: WishViewModel, navController: NavCont
                             )
                         )
                         snackMessage.value = "Wish has been created!"
+                        viewModel.resetTitleDescriptionState()
                     }
                 } else {
                     // TODO: ENTER FIELDS for wish to be created
