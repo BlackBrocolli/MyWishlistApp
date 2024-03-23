@@ -39,7 +39,7 @@ fun HomeView(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate(Screen.AddScreen.route)
+                    navController.navigate("${Screen.AddScreen.route}/0L")
                 },
                 modifier = Modifier.padding(20.dp),
                 containerColor = Color.Black
@@ -62,7 +62,8 @@ fun HomeView(
         ) {
             items(wishlist.value) { wish ->
                 WishItem(wish = wish) {
-
+                    val id = wish.id
+                    navController.navigate("${Screen.AddScreen.route}/$id")
                 }
             }
         }

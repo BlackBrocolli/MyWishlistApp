@@ -16,6 +16,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -41,6 +42,17 @@ fun AddEditDetailView(id: Long, viewModel: WishViewModel, navController: NavCont
     }
     val scope = rememberCoroutineScope() // we can use launch method to do something parallel
     val scaffoldstate = rememberScaffoldState() // make sure everything is update when UI changed
+
+    // jika ada id yang dikirim ke halaman ini
+    // maka update Title dan Description state
+    if (id != 0L) {
+        val wish = viewModel.getAWishById(id).collectAsState(initial = Wish(0L, "", ""))
+        viewModel.wishTitleState = wish.value.title
+        viewModel.wishDescriptionState = wish.value.description
+    } else {
+        viewModel.wishTitleState = ""
+        viewModel.wishDescriptionState = ""
+    }
 
     Scaffold(
         scaffoldState = scaffoldstate,
@@ -91,7 +103,6 @@ fun AddEditDetailView(id: Long, viewModel: WishViewModel, navController: NavCont
                             )
                         )
                         snackMessage.value = "Wish has been created!"
-                        viewModel.resetTitleDescriptionState()
                     }
                 } else {
                     // TODO: ENTER FIELDS for wish to be created
@@ -130,6 +141,7 @@ fun WishTextField(
         // For example: the text color, the focus border color, the unfocused border color, all of those things
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedTextColor = Color.Black,
+            unfocusedTextColor = Color.Black,
             focusedBorderColor = colorResource(id = R.color.black),
             unfocusedBorderColor = colorResource(id = R.color.black),
             cursorColor = colorResource(id = R.color.black),
